@@ -5,6 +5,11 @@ public abstract class GameObject {
     protected int x, y;
     public abstract char getSymbol();
 
+    public GameObject(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
     public int getX() {
         return x;
     }
@@ -19,5 +24,13 @@ public abstract class GameObject {
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    @Override
+    public String toString() {
+        return "GameObject{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
     }
 }

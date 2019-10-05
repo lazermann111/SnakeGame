@@ -10,18 +10,15 @@ public class Screen {
 
     public Screen() {
         screen = new char[SCREEN_HEIGHT][SCREEN_WIDTH];
+    }
 
+    public void clearScreen()
+    {
         for (int i = 0; i < SCREEN_HEIGHT; i++) {
             for (int j = 0; j < SCREEN_WIDTH; j++) {
                 screen[i][j] = ' ';
             }
         }
-
-        setUpWalls();
-    }
-
-    public void setSymbol(int x, int y, char symbol) {
-        screen[x][y] = symbol;
     }
 
     public void printScreen() {
@@ -33,29 +30,9 @@ public class Screen {
         }
     }
 
-    public void setVerticalRow(int row, char wallSymbol)
+    public void draw(GameObject gameObject)
     {
-        for (int i = 0; i < SCREEN_HEIGHT ; i++) {
-            screen[i][row] = wallSymbol;
-        }
-    }
-
-    public void setHorizontalRow(int row, char wallSymbol)
-    {
-        for (int i = 0; i < SCREEN_WIDTH ; i++) {
-            screen[row][i] = wallSymbol;
-        }
-    }
-
-    private void setUpWalls()
-    {
-        Wall w = new Wall();
-
-        setVerticalRow(0, w.getSymbol());
-        setVerticalRow(SCREEN_WIDTH - 1, w.getSymbol());
-
-        setHorizontalRow(0, w.getSymbol());
-        setHorizontalRow(SCREEN_HEIGHT - 1, w.getSymbol());
+        screen[gameObject.getX()][gameObject.getY()] = gameObject.getSymbol();
     }
 
     public char[][] getScreen() {

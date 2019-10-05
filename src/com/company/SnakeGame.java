@@ -1,10 +1,10 @@
 package com.company;
 
 
-import com.company.gameobjects.Food;
-import com.company.gameobjects.Screen;
-import com.company.gameobjects.Snake;
+import com.company.gameobjects.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -15,16 +15,13 @@ public class SnakeGame {
 
     public static void main(String[] args) {
         Screen screen = new Screen();
-        Food f = new Food();
+        List<GameObject> objectList = new ArrayList<>();
+        Food f = new Food(getRandomPosOnScreen(SCREEN_HEIGHT), getRandomPosOnScreen(SCREEN_WIDTH));
+        Snake snake = new Snake(10,10);
 
-        screen.setSymbol(
-                getRandomPosOnScreen(SCREEN_HEIGHT),
-                getRandomPosOnScreen(SCREEN_WIDTH),
-                f.getSymbol());
-        Snake s = new Snake(10,10);
-        screen.setSymbol(s.getX(), s.getY(), s.getSymbol());
-        screen.printScreen();
-
+        objectList.add(f);
+        objectList.add(snake);
+        objectList.addAll(setUpWalls());
 
         // Input from player
         Scanner scanner = new Scanner(System.in);
@@ -34,30 +31,53 @@ public class SnakeGame {
         boolean isRunning = true;
 
         while (isRunning) {
+            screen.clearScreen();
+            for(GameObject object : objectList)
+            {
+                screen.draw(object);
+            }
             screen.printScreen();
             // Get input from player and do something
             switch (input = scanner.nextLine().charAt(0)) {
                 case 'a':
-                    s.moveLeft(screen, s);
+                    snake.moveLeft(screen, snake);
                     break;
                 case 'd':
-                    s.moveRight(screen, s);
+                    snake.moveRight(screen, snake);
                     break;
                 case 'w':
-                    s.moveUp(screen, s);
+                    snake.moveUp(screen, snake);
                     break;
                 case 's':
-                    s.moveDown(screen, s);
+                    snake.moveDown(screen, snake);
                     break;
             }
         }
     }
 
 
+    public static List<Wall> setUpWalls()
+    {
+        List<Wall> result = new ArrayList<>();
+
+        //vertical walls
+        for (int i = 0; i < SCREEN_WIDTH ; i++) {
+            result.add(new Wall(0, i));
+            result.add(new Wall(SCREEN_HEIGHT - 1, i));
+        }
+
+        //horizontal walls
+        for (int i = 0; i < SCREEN_HEIGHT ; i++) {
+            result.add(new Wall(i, 0));
+            result.add(new Wall( i, SCREEN_WIDTH - 1));
+        }
+
+        return result;
+    }
 
     private static Random rnd = new Random();
     private static final int getRandomPosOnScreen(int max)
     {
-       return rnd.nextInt(max);
+       return rnd.nextInt(max)/2 + max/2;
     }
 }
