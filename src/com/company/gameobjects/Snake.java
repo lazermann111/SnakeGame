@@ -1,18 +1,19 @@
 package com.company.gameobjects;
 
 
-public class Snake {
-    private int x, y;
-
-    private char symbol='Y';
-    public char getSymbol() {
-        return symbol;
-    }
+public class Snake extends GameObject {
+    private final static char SNAKE_CELL ='Y';
 
     public Snake(int x, int y) {
         this.x = x;
         this.y = y;
     }
+
+    @Override
+    public char getSymbol() {
+        return SNAKE_CELL;
+    }
+
 
     public void moveLeft(Screen screen, Snake snake) {
         snake.setX(getX() - 1);
@@ -37,24 +38,4 @@ public class Snake {
 
     }
 
-
-    public int getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public void setSymbol(char symbol) {
-        this.symbol = symbol;
-    }
 }

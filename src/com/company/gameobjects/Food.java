@@ -1,8 +1,10 @@
 package com.company.gameobjects;
 
-public class Food {
-    private char symbol='*';
+public class Food extends GameObject {
+    private final static char FOOD_CELL ='*';
+
+    @Override
     public char getSymbol() {
-        return symbol;
+        return FOOD_CELL;
     }
 }
