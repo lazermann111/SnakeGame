@@ -20,7 +20,6 @@ public class SnakeGame {
         Snake snake = new Snake(10,10);
 
         objectList.add(f);
-        objectList.add(snake);
         objectList.addAll(setUpWalls());
 
         // Input from player
@@ -32,11 +31,15 @@ public class SnakeGame {
 
         while (isRunning) {
             screen.clearScreen();
-            for(GameObject object : objectList)
+            for(GameObject object : objectList) //objectList.forEach(screen::draw);
             {
                 screen.draw(object);
             }
+            screen.draw(snake);
             screen.printScreen();
+
+            checkCollisions(snake, objectList);
+
             // Get input from player and do something
             switch (input = scanner.nextLine().charAt(0)) {
                 case 'a':
@@ -51,6 +54,17 @@ public class SnakeGame {
                 case 's':
                     snake.moveDown(screen, snake);
                     break;
+            }
+        }
+    }
+
+    private static void checkCollisions(Snake snake,  List<GameObject> objectList )
+    {
+        for (GameObject o : objectList)
+        {
+            if(snake.collides(o))
+            {
+               snake.applyCollisionEffect(o);
             }
         }
     }

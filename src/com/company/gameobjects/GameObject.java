@@ -26,6 +26,11 @@ public abstract class GameObject {
         this.y = y;
     }
 
+    public boolean collides(GameObject other)
+    {
+        return this.x == other.x && this.y == other.y;
+    }
+
     @Override
     public String toString() {
         return "GameObject{" +

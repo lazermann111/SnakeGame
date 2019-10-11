@@ -8,6 +8,28 @@ public class Snake extends GameObject {
         super(x, y);
     }
 
+    private void addSegment()
+    {
+
+    }
+
+    public void applyCollisionEffect(GameObject collider)
+    {
+        if(collider instanceof Food)
+        {
+            addSegment();
+        }
+        else if(collider instanceof Wall)
+        {
+            System.out.println("GAME OVER!");
+            System.exit(0);
+        }
+        else if(collider instanceof Snake) //shouldn't happen yet
+        {
+            System.out.println("Snake collides with itself??");
+        }
+    }
+
 
     @Override
     public char getSymbol() {
