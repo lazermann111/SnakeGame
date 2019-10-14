@@ -9,14 +9,14 @@ public class Screen {
     private char[][] screen;
 
     public Screen() {
-        screen = new char[SCREEN_HEIGHT][SCREEN_WIDTH];
+        screen = new char[SCREEN_WIDTH][SCREEN_HEIGHT];
     }
 
     public void clearScreen()
     {
         for (int i = 0; i < SCREEN_HEIGHT; i++) {
             for (int j = 0; j < SCREEN_WIDTH; j++) {
-                screen[i][j] = ' ';
+                screen[j][i] = ' ';
             }
         }
     }
@@ -24,7 +24,7 @@ public class Screen {
     public void printScreen() {
         for (int i = 0; i < SCREEN_HEIGHT; i++) {
             for (int j = 0; j < SCREEN_WIDTH; j++) {
-                System.out.print(screen[i][j]);
+                System.out.print(screen[j][i]);
             }
             System.out.println();
         }

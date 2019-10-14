@@ -73,23 +73,22 @@ public class Snake extends GameObject {
 
     public void moveLeft(Screen screen, Snake snake) {
         moveTail();
-        snake.head.setY(getY() - 1);
+        snake.head.setX(getX() - 1);
     }
 
     public void moveRight(Screen screen, Snake snake) {
         moveTail();
-        snake.head.setY(getY() + 1);
+        snake.head.setX(getX() + 1);
     }
 
     public void moveUp(Screen screen, Snake snake) {
         moveTail();
-        snake.head.setX(getX() - 1);
-
+        snake.head.setY(getY() - 1);
     }
 
     public void moveDown(Screen screen, Snake snake) {
         moveTail();
-        snake.head.setX(getX() + 1);
+        snake.head.setY(getY() + 1);
     }
 
     @Override

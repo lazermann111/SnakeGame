@@ -69,7 +69,7 @@ public class SnakeGame {
 
     private static Food generateFood()
     {
-        return new Food(getRandomPosOnScreen(SCREEN_HEIGHT), getRandomPosOnScreen(SCREEN_WIDTH));
+        return new Food(getRandomPosOnScreen(SCREEN_WIDTH), getRandomPosOnScreen(SCREEN_HEIGHT));
     }
 
     private static void checkCollisions(Snake snake,  List<GameObject> objectList )
@@ -97,15 +97,15 @@ public class SnakeGame {
         List<Wall> result = new ArrayList<>();
 
         //vertical walls
-        for (int i = 0; i < SCREEN_WIDTH ; i++) {
+        for (int i = 0; i < SCREEN_HEIGHT ; i++) {
             result.add(new Wall(0, i));
-            result.add(new Wall(SCREEN_HEIGHT - 1, i));
+            result.add(new Wall(SCREEN_WIDTH - 1, i));
         }
 
         //horizontal walls
-        for (int i = 0; i < SCREEN_HEIGHT ; i++) {
+        for (int i = 0; i < SCREEN_WIDTH ; i++) {
             result.add(new Wall(i, 0));
-            result.add(new Wall( i, SCREEN_WIDTH - 1));
+            result.add(new Wall( i, SCREEN_HEIGHT - 1));
         }
 
         return result;
