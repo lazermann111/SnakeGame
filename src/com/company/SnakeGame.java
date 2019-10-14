@@ -16,10 +16,18 @@ public class SnakeGame {
     public static void main(String[] args) {
         Screen screen = new Screen();
         List<GameObject> objectList = new ArrayList<>();
-        Food f = new Food(getRandomPosOnScreen(SCREEN_HEIGHT), getRandomPosOnScreen(SCREEN_WIDTH));
+
         Snake snake = new Snake(10,10);
 
-        objectList.add(f);
+        objectList.add(generateFood());
+        objectList.add(generateFood());
+        objectList.add(generateFood());
+        objectList.add(generateFood());
+        objectList.add(generateFood());
+        objectList.add(generateFood());
+        objectList.add(generateFood());
+        objectList.add(generateFood());
+
         objectList.addAll(setUpWalls());
 
         // Input from player
@@ -59,14 +67,27 @@ public class SnakeGame {
         }
     }
 
+    private static Food generateFood()
+    {
+        return new Food(getRandomPosOnScreen(SCREEN_HEIGHT), getRandomPosOnScreen(SCREEN_WIDTH));
+    }
+
     private static void checkCollisions(Snake snake,  List<GameObject> objectList )
     {
+        snake.checkTailCollisions();
+        GameObject collider = null;
         for (GameObject o : objectList)
         {
             if(snake.collides(o))
             {
                snake.applyCollisionEffect(o);
+               if(o instanceof Food)
+                   collider = o;
             }
+        }
+        if(collider != null){
+            objectList.remove(collider);
+            objectList.add(generateFood());
         }
     }
 

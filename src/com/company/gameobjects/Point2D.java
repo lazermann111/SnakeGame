@@ -12,6 +12,11 @@ public class Point2D {
         this.y = y;
     }
 
+    public Point2D(Point2D other) {
+        this.x = other.x;
+        this.y = other.y;
+    }
+
     public int getX() {
         return x;
     }
@@ -46,5 +51,13 @@ public class Point2D {
     @Override
     public int hashCode() {
         return Objects.hash(x, y);
+    }
+
+    @Override
+    public String toString() {
+        return "Point2D{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
     }
 }

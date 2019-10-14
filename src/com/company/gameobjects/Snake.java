@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Snake extends GameObject {
     private final static char SNAKE_CELL = 'Y';
+    private final static char SNAKE_TAIL = '$';
 
     private Point2D head;
     private List<Point2D> tail;
@@ -17,14 +18,19 @@ public class Snake extends GameObject {
     }
 
     private void addSegment() {
-
+        if (tail.isEmpty()) {
+            tail.add(new Point2D(head.getX(), head.getY()));
+        } else {
+            Point2D last = tail.get(tail.size() - 1);
+            tail.add(new Point2D(last));
+        }
     }
 
     public void draw(Screen screen) {
         screen.draw(head.getX(), head.getY(), getSymbol());
         // tail.forEach(a -> screen.draw(a.x, a.y, getSymbol()));
         for (Point2D s : tail) {
-            screen.draw(s.getX(), s.getY(), getSymbol());
+            screen.draw(s.getX(), s.getY(), SNAKE_TAIL);
         }
     }
 
@@ -40,6 +46,17 @@ public class Snake extends GameObject {
         }
     }
 
+    public void checkTailCollisions() {
+        //if(tail.stream().anyMatch(a -> a.equals(head)))
+        for (Point2D t : tail)
+        {
+            if (t.equals(head))
+            {
+                System.out.println("GAME OVER!");
+                System.exit(0);
+            }
+        }
+    }
 
     @Override
     public char getSymbol() {
@@ -47,32 +64,47 @@ public class Snake extends GameObject {
     }
 
     private void moveTail() {
-        if(tail.isEmpty()) return;
-
+        if (tail.isEmpty()) return;
         tail.get(0).setPosition(head);
-        for (int i = 1; i < tail.size() - 1; i++) {
-            tail.get(i).setPosition(tail.get(i + 1));
+        for (int i = tail.size() - 1; i > 0; i--) {
+            tail.get(i).setPosition(tail.get(i - 1));
         }
     }
 
     public void moveLeft(Screen screen, Snake snake) {
-        snake.setX(getX() - 1);
         moveTail();
+        snake.head.setY(getY() - 1);
     }
 
     public void moveRight(Screen screen, Snake snake) {
-        snake.setX(getX() + 1);
         moveTail();
+        snake.head.setY(getY() + 1);
     }
 
     public void moveUp(Screen screen, Snake snake) {
-        snake.setY(getY() - 1);
         moveTail();
+        snake.head.setX(getX() - 1);
+
     }
 
     public void moveDown(Screen screen, Snake snake) {
-        snake.setY(getY() + 1);
         moveTail();
+        snake.head.setX(getX() + 1);
     }
 
+    @Override
+    public int getX() {
+        return head.getX();
+    }
+
+    @Override
+    public int getY() {
+        return head.getY();
+    }
+
+    @Override
+    public boolean collides(GameObject other) {
+        return this.head.getX() == other.position.getX()
+                && this.head.getY() == other.position.getY();
+    }
 }
