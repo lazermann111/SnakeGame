@@ -35,7 +35,8 @@ public class SnakeGame {
             {
                 screen.draw(object);
             }
-            screen.draw(snake);
+            snake.draw(screen);
+
             screen.printScreen();
 
             checkCollisions(snake, objectList);

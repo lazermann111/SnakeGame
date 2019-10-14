@@ -35,6 +35,11 @@ public class Screen {
         screen[gameObject.getX()][gameObject.getY()] = gameObject.getSymbol();
     }
 
+    public void draw(int x, int y, char symbol)
+    {
+        screen[x][y] = symbol;
+    }
+
     public char[][] getScreen() {
         return screen;
     }

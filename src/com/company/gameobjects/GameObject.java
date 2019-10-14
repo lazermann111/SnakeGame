@@ -2,40 +2,40 @@ package com.company.gameobjects;
 
 
 public abstract class GameObject {
-    protected int x, y;
+    protected Point2D position;
     public abstract char getSymbol();
 
     public GameObject(int x, int y) {
-        this.x = x;
-        this.y = y;
+        position = new Point2D(x,y);
     }
 
     public int getX() {
-        return x;
+        return position.getX();
     }
 
     public void setX(int x) {
-        this.x = x;
+        this.position.setX(x);
     }
 
     public int getY() {
-        return y;
+        return position.getY();
     }
 
     public void setY(int y) {
-        this.y = y;
+        this.position.setY(y);
     }
 
     public boolean collides(GameObject other)
     {
-        return this.x == other.x && this.y == other.y;
+        return this.position.getX() == other.position.getX()
+                && this.position.getY() == other.position.getY();
     }
 
-    @Override
-    public String toString() {
-        return "GameObject{" +
-                "x=" + x +
-                ", y=" + y +
-                '}';
+    public Point2D getPosition() {
+        return position;
+    }
+
+    public void setPosition(Point2D position) {
+        this.position = position;
     }
 }
