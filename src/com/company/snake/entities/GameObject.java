@@ -1,5 +1,7 @@
-package com.company.gameobjects;
+package com.company.snake.entities;
 
+
+import com.company.snake.Point2D;
 
 public abstract class GameObject {
     protected Point2D position;

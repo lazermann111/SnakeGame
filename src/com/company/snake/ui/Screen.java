@@ -1,5 +1,7 @@
-package com.company.gameobjects;
+package com.company.snake.ui;
 
+
+import com.company.snake.entities.GameObject;
 
 public class Screen {
 

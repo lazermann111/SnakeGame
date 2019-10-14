@@ -1,15 +1,19 @@
 package com.company;
 
 
-import com.company.gameobjects.*;
+import com.company.snake.entities.Food;
+import com.company.snake.entities.GameObject;
+import com.company.snake.entities.Snake;
+import com.company.snake.entities.Wall;
+import com.company.snake.ui.Screen;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
-import static com.company.gameobjects.Screen.SCREEN_HEIGHT;
-import static com.company.gameobjects.Screen.SCREEN_WIDTH;
+import static com.company.snake.ui.Screen.SCREEN_HEIGHT;
+import static com.company.snake.ui.Screen.SCREEN_WIDTH;
 
 public class SnakeGame {
 

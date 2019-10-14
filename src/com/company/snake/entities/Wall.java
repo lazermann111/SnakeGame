@@ -1,4 +1,4 @@
-package com.company.gameobjects;
+package com.company.snake.entities;
 
 
 public class Wall extends GameObject {

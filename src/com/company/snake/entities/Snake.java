@@ -1,5 +1,8 @@
-package com.company.gameobjects;
+package com.company.snake.entities;
 
+
+import com.company.snake.Point2D;
+import com.company.snake.ui.Screen;
 
 import java.util.ArrayList;
 import java.util.List;

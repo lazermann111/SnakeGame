@@ -1,4 +1,4 @@
-package com.company.gameobjects;
+package com.company.snake.entities;
 
 public class Food extends GameObject {
     private final static char FOOD_CELL ='*';
