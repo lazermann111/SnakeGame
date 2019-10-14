@@ -43,9 +43,10 @@ public class Snake extends GameObject {
         } else if (collider instanceof Wall) {
             System.out.println("GAME OVER!");
             System.exit(0);
-        } else if (collider instanceof Snake) //shouldn't happen yet
+        }
+        else if (collider instanceof WormHole)
         {
-            System.out.println("Snake collides with itself??");
+            ((WormHole)collider).passWormHole(this);
         }
     }
 
@@ -108,5 +109,9 @@ public class Snake extends GameObject {
     public boolean collides(GameObject other) {
         return this.head.getX() == other.position.getX()
                 && this.head.getY() == other.position.getY();
+    }
+
+    public Point2D getHead() {
+        return head;
     }
 }

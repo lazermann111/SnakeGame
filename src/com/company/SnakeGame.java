@@ -1,10 +1,6 @@
 package com.company;
 
-
-import com.company.snake.entities.Food;
-import com.company.snake.entities.GameObject;
-import com.company.snake.entities.Snake;
-import com.company.snake.entities.Wall;
+import com.company.snake.entities.*;
 import com.company.snake.ui.Screen;
 
 import java.util.ArrayList;
@@ -31,6 +27,9 @@ public class SnakeGame {
         objectList.add(generateFood());
         objectList.add(generateFood());
         objectList.add(generateFood());
+
+        objectList.addAll(generateWormHoles());
+
 
         objectList.addAll(setUpWalls());
 
@@ -76,6 +75,21 @@ public class SnakeGame {
         return new Food(getRandomPosOnScreen(SCREEN_WIDTH), getRandomPosOnScreen(SCREEN_HEIGHT));
     }
 
+    private static List<WormHole> generateWormHoles()
+    {
+        List<WormHole> wormHoles = new ArrayList<>();
+        for (int i = 0; i < 10; i++)
+        {
+            wormHoles.add(new WormHole(getRandomPosOnScreen(SCREEN_WIDTH), getRandomPosOnScreen(SCREEN_HEIGHT)));
+            if(i > 0)
+                wormHoles.get(i).setAdjacent(wormHoles.get(i-1));
+        }
+        wormHoles.get(0).setAdjacent(wormHoles.get(9));
+
+       return  wormHoles;
+    }
+
+
     private static void checkCollisions(Snake snake,  List<GameObject> objectList )
     {
         snake.checkTailCollisions();
@@ -118,6 +132,6 @@ public class SnakeGame {
     private static Random rnd = new Random();
     private static final int getRandomPosOnScreen(int max)
     {
-       return rnd.nextInt(max)/2 + max/2;
+       return rnd.nextInt(max);
     }
 }
